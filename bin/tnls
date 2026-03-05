@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+local list_sessions
+local selected_session
+list_sessions="$(tmux ls)"
+
+selected_session="$(echo "$list_sessions" | cut -d":" -f1 | fzf)"
+
+if [[ -z "$selected_session" ]];
+then
+	while true; do
+		echo -n "Create new session? yes/no\n"
+		read -r m
+		case $m in
+		no) exit 0 ;; # exit without error
+		yes) tn && exit 0;;
+		*) echo "Not a valid command"; continue
+		esac
+	done
+
+	tn
+else
+	tmux a -t "$selected_session"
+fi
+

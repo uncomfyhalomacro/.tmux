@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+local random_word
+local last_command
+random_word="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
+
+tmux break-pane -n "${random_word}"

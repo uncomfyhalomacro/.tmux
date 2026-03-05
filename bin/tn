@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+local random_word
+local curdir
+random_word="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
+random_word2="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
+curdir="$(basename "$PWD")"
+
+tmux new -s "${random_word}+$curdir"\; rename-window "${random_word2}"
