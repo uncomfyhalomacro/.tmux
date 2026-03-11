@@ -2,6 +2,6 @@
 
 local random_word
 local last_command
-random_word="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
+random_word="$(openssl rand -hex 3)"
 
 tmux new-window -n "${random_word}"

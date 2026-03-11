@@ -1,9 +1,10 @@
-#!/bin/zsh
+#!/bin/sh
 
-local random_word
-local curdir
-random_word="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
-random_word2="$(sort -R /usr/share/dict/web2 /usr/share/dict/web2 | head -n 1)"
-curdir="$(basename "$PWD")"
+main () {
+  random_word=$(shuf -n1 /usr/share/dict/web2)
+  pane_name=$(openssl rand -hex 3)
+  curdir=$(basename "$PWD")
+  tmux new-session -s "${random_word}+${curdir}" \; select-pane -T "${pane_name}"
+}
 
-tmux new -s "${random_word}+$curdir"\; rename-window "${random_word2}"
+main
